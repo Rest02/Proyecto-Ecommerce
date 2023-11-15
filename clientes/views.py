@@ -3,14 +3,36 @@ from django.shortcuts import render, redirect
 # from django.contrib.auth import logout
 from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
+
+
 
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
 
 
+
 def login123(request):
-    return render(request, "login123.html")
+    form = AuthenticationForm()
+    if request.method == 'POST':
+        # Obtener los datos del formulario de inicio de sesión
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # Autenticar al usuario
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            # El usuario se autenticó correctamente, iniciar sesión
+            login(request, user)
+            return redirect('home')  # Redirige a la página de inicio después del inicio de sesión
+        else:
+            # El usuario no se autenticó correctamente, manejar el error
+            messages.error(request, 'Nombre de usuario o contraseña incorrectos.')
+
+    return render(request, 'login123.html', {'form': form})
 
 
 def signup(request):

@@ -1,1 +1,10 @@
 <h1>home</h1>
+
+{% for producto in productos  %}
+
+    <p>{{producto.nombre_producto}}</p>
+    <p>{{producto.cantidad_disponible}}</p>
+    <p>{{producto.precio_producto}}</p>
+    <p>{{producto.descripcion_producto}}</p>
+
+{% endfor %}

@@ -5,12 +5,16 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from .models import Products
+
+
 
 
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+    products = Products.objects.all()
+    return render(request, 'home.html', {"productos":products})
 
 
 

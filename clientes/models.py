@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 
@@ -17,3 +18,12 @@ class Products(models.Model):
 
     def __str__(self):
         return self.nombre_producto
+    
+class Valoracion(models.Model):
+    producto = models.ForeignKey(Products, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    puntuacion = models.IntegerField()
+    comentario = models.TextField()
+
+    def __str__(self):
+        return self.comentario + " - " + self.producto.nombre_producto

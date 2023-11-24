@@ -1,10 +1,12 @@
 <h1>home</h1>
 
-{% for producto in productos  %}
-
-    <p>{{producto.nombre_producto}}</p>
-    <p>{{producto.cantidad_disponible}}</p>
-    <p>{{producto.precio_producto}}</p>
-    <p>{{producto.descripcion_producto}}</p>
-
+{% for producto in productos %}
+    <a href="{% url 'vista_producto' products_id=producto.id %}">
+        <button>
+            <p>{{ producto.nombre_producto }}</p>
+            <p>{{ producto.cantidad_disponible }}</p>
+            <p>{{ producto.precio_producto }}</p>
+            <p>{{ producto.descripcion_producto }}</p>
+        </button>
+    </a>
 {% endfor %}

@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 # from django.contrib.auth.decorators import login_required
 # from django.contrib.auth import logout
 from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from .models import Products
+from .models import Products, Valoracion
+from .forms import ValoracionForm
 
 
 
@@ -58,6 +59,25 @@ def signup(request):
 
     return render(request, 'signup.html', data)
 
+
+def vistadelproducto(request, products_id):
+    producto_seleccionado = get_object_or_404(Products, pk=products_id)
+    valoraciones_filtradas = Valoracion.objects.filter(producto=producto_seleccionado)
+    form = ValoracionForm()
+
+    if request.method == 'POST':
+        form = ValoracionForm(request.POST)
+        if form.is_valid():
+            valoracion = form.save(commit=False)
+            valoracion.producto = producto_seleccionado
+            valoracion.usuario = request.user  # Suponiendo que tienes un sistema de autenticación de usuarios
+            valoracion.save()
+
+    return render(request, 'vista_producto.html', {
+        'producto': producto_seleccionado, 
+        'valoraciones': valoraciones_filtradas, 
+        'form': form
+        })
 
 
 

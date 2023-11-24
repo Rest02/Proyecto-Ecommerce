@@ -1,0 +1,21 @@
+<!-- detalle_producto.html -->
+
+<h1>{{ producto.nombre_producto }}</h1>
+<p>{{ producto.descripcion_producto }}</p>
+
+<h2>Agregar Valoración</h2>
+<form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar</button>
+</form>
+
+
+
+<h2>Valoraciones</h2>
+
+{% for valoracion in valoraciones %}
+    <p>{{ valoracion.usuario.username }} </p>
+    <p>Comentario: {{ valoracion.comentario }}</p>
+{% endfor %}
+

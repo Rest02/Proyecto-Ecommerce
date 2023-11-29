@@ -1,3 +1,9 @@
+{% extends "layouts/base.html" %}
+
+
+
+
+{% block content %}
 <!-- detalle_producto.html -->
 
 <h1>{{ producto.nombre_producto }}</h1>
@@ -22,3 +28,6 @@
     <p>Comentario: {{ valoracion.comentario }}</p>
 {% endfor %}
 
+
+
+{% endblock %}

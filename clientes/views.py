@@ -7,6 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from .models import Products, Valoracion
 from .forms import ValoracionForm
+from .carro import Carro
 
 
 
@@ -80,8 +81,48 @@ def vistadelproducto(request, products_id):
         })
 
 
+def carrito(request):
+    return render(request, "carrito.html" )
 
 
+
+def agregar_producto(request, producto_id):
+
+    carro = Carro(request)
+
+    producto = Products.objects.get(id=producto_id)
+
+    carro.agregar(producto=producto)
+
+    return redirect("/carrito/")
+
+def eliminar_producto(request, producto_id):
+
+    carro = Carro(request)
+
+    producto = Products.objects.get(id=producto_id)
+
+    carro.eliminar(producto=producto)
+
+    return redirect("/carrito/")
+
+def restar_producto(request, producto_id):
+
+    carro = Carro(request)
+
+    producto = Products.objects.get(id=producto_id)
+
+    carro.restar(producto=producto)
+
+    return redirect("/carrito/")
+
+def limpiar_carro(request):
+
+    carro = Carro(request)
+
+    carro.limpiar_carro()
+
+    return redirect("/carrito/")
 
 
 

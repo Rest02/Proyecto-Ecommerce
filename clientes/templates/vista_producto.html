@@ -2,6 +2,9 @@
 
 <h1>{{ producto.nombre_producto }}</h1>
 <p>{{ producto.descripcion_producto }}</p>
+<a href="{% url 'agregar' producto.id %}">
+    <button> Agregar al carro </button> 
+</a>
 
 <h2>Agregar Valoración</h2>
 <form method="post" action="">

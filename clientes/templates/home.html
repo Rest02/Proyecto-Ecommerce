@@ -3,12 +3,14 @@
 
 
 {% block content %}
+{% load static %}
 <h1>home</h1>
 
 {% for producto in productos %}
     <a href="{% url 'vista_producto' products_id=producto.id %}">
         <button>
             <p>{{ producto.nombre_producto }}</p>
+            <img src="{{ producto.image.url }}" alt="{{ producto.nombre_producto }}">
             <p>{{ producto.cantidad_disponible }}</p>
             <p>{{ producto.precio_producto }}</p>
             <p>{{ producto.descripcion_producto }}</p>

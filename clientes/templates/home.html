@@ -41,7 +41,21 @@
         {% endfor %}
     </div>
     
-
+    <form method="get" action="{% url 'home' %}">
+        <label for="categoria">Categoría:</label>
+        <input type="text" name="categoria" value="{{ request.GET.categoria }}">
+        
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" value="{{ request.GET.nombre }}">
+        
+        <label for="precio_min">Precio mínimo:</label>
+        <input type="text" name="precio_min" value="{{ request.GET.precio_min }}">
+        
+        <label for="precio_max">Precio máximo:</label>
+        <input type="text" name="precio_max" value="{{ request.GET.precio_max }}">
+        
+        <button type="submit">Buscar</button>
+    </form>
 
 
 

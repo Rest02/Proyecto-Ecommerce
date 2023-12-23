@@ -9,6 +9,7 @@ from django.contrib import messages
 from .models import Products, Valoracion
 from .forms import ValoracionForm
 from .carro import Carro
+# from django.db.models import Q
 
 
 
@@ -23,6 +24,24 @@ def logout_view(request):
 
 def home(request):
     products = Products.objects.all()
+
+    
+    # Obtener parámetros de la URL
+    categoria = request.GET.get('categoria')
+    nombre = request.GET.get('nombre')
+    precio_min = request.GET.get('precio_min')
+    precio_max = request.GET.get('precio_max')
+
+    # Aplicar filtros si se proporcionan
+    if categoria:
+        products = products.filter(categoria=categoria)
+    if nombre:
+        products = products.filter(nombre_producto__icontains=nombre)
+    if precio_min:
+        products = products.filter(precio_producto__gte=precio_min)
+    if precio_max:
+        products = products.filter(precio_producto__lte=precio_max)
+
     return render(request, 'home.html', {"productos":products})
 
 

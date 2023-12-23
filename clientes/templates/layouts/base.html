@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
 
 
 
@@ -79,12 +79,12 @@
         </div>
     </nav>  
     
-    
-    {% block content %}
-    {% endblock %}
+    <div class="flex-grow" >
+        {% block content %}
+        {% endblock %}
+    </div>
 
-
-    <footer class="bg-white shadow dark:bg-gray-900 bottom-0 w-full">
+    <footer class="bg-white shadow dark:bg-gray-900 bottom-0 w-full flex-shrink-0">
         <div class="w-full max-w-screen-xl mx-auto p-2 md:p-4">
             <div class="sm:flex sm:items-center sm:justify-between">
                 <a href="https://flowbite.com/" class="flex items-center mb-2 sm:mb-0 space-x-3 rtl:space-x-reverse">

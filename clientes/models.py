@@ -16,6 +16,7 @@ class Products(models.Model):
     precio_producto = models.IntegerField(default=0)
     descripcion_producto = models.TextField()
     image = models.ImageField(blank=True, null=True)
+    categoria = models.CharField(max_length=100, default="Producto")
 
     def __str__(self):
         return self.nombre_producto

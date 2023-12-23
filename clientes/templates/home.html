@@ -1,23 +1,57 @@
 {% extends "layouts/base.html" %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+</head>
+<body>
 
-
-{% block content %}
-{% load static %}
-<h1>home</h1>
-
-{% for producto in productos %}
-    <a href="{% url 'vista_producto' products_id=producto.id %}">
-        <button>
-            <p>{{ producto.nombre_producto }}</p>
-            <img src="{{ producto.image.url }}" alt="{{ producto.nombre_producto }}">
-            <p>{{ producto.cantidad_disponible }}</p>
-            <p>{{ producto.precio_producto }}</p>
-            <p>{{ producto.descripcion_producto }}</p>
-        </button>
-    </a>
-{% endfor %}
+    {% block content %}
+    {% load static %}
+    <h1>home</h1>
 
 
 
-{% endblock %}
+    <div class="flex flex-wrap justify-around py-32" >
+        {% for producto in productos %}
+            <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-12">
+                <a href="{% url 'vista_producto' products_id=producto.id %}">
+                    <img class="p-8 rounded-t-lg" src="{{ producto.image.url }}" alt="{{ producto.nombre_producto }}" />
+                </a>
+                <div class="px-5 pb-5">
+                    <a href="#">
+                        <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ producto.nombre_producto }}</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{producto.descripcion_producto}}</p>
+
+                    <div class="flex items-center mt-2.5 mb-5">
+                        <div class="flex items-center space-x-1 rtl:space-x-reverse"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-3xl font-bold text-gray-900 dark:text-white">$ {{ producto.precio_producto }}</span>
+                        <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+
+
+
+
+    {% endblock %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    
+</body>
+</html>
+
+
+
+

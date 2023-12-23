@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import logout
 from django.contrib import messages
 from .models import Products, Valoracion
 from .forms import ValoracionForm
@@ -14,6 +15,12 @@ from .carro import Carro
 
 
 # Create your views here.
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
+
+
 def home(request):
     products = Products.objects.all()
     return render(request, 'home.html', {"productos":products})

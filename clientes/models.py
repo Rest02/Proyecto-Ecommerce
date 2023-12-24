@@ -16,7 +16,7 @@ class Products(models.Model):
 class Valoracion(models.Model):
     producto = models.ForeignKey(Products, on_delete=models.CASCADE)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    puntuacion = models.IntegerField()
+    # puntuacion = models.IntegerField()
     comentario = models.TextField()
 
     def __str__(self):

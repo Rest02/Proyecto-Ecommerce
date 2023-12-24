@@ -24,7 +24,7 @@ class CustomUserCreationForm(UserCreationForm):
 class ValoracionForm(forms.ModelForm):
     class Meta:
         model = Valoracion
-        fields = ['puntuacion', 'comentario']
+        fields = ['comentario']
 
 
 class ContactoForm(forms.ModelForm):

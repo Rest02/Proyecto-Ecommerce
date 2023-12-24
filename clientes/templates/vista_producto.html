@@ -2,32 +2,130 @@
 
 
 
-
 {% block content %}
 <!-- detalle_producto.html -->
+{% comment %} <div class = "pt-48">
+    <h1>{{ producto.nombre_producto }}</h1>
+    <p>{{ producto.descripcion_producto }}</p>
+    <a href="{% url 'agregar' producto.id %}">
+        <button> Agregar al carro </button> 
+    </a>
 
-<h1>{{ producto.nombre_producto }}</h1>
-<p>{{ producto.descripcion_producto }}</p>
-<a href="{% url 'agregar' producto.id %}">
-    <button> Agregar al carro </button> 
-</a>
-
-<h2>Agregar Valoración</h2>
-<form method="post" action="">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Enviar</button>
-</form>
+     {% endcomment %}
 
 
 
-<h2>Valoraciones</h2>
-
-{% for valoracion in valoraciones %}
-    <p>{{ valoracion.usuario.username }} </p>
-    <p>Comentario: {{ valoracion.comentario }}</p>
-{% endfor %}
 
 
+    <div class="mt-40 mb-28 mx-auto max-w-4xl bg-white border border-gray-200 rounded-lg shadow sm:p-8 md:p-12 dark:bg-gray-800 dark:border-gray-700">
+
+        <a href="#">
+            <img class="p-8 rounded-t-lg" src="{{ producto.image.url }}" alt="product image" />
+        </a>
+        <div class="px-5 pb-5">
+            <a href="#">
+                <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ producto.nombre_producto }}</h5>
+            </a>
+            <div class="flex items-center mt-2.5 mb-5">
+                <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                    <p class="mb-3 text-gray-500 dark:text-gray-400">{{producto.descripcion_producto}}</p>
+                </div>
+
+            </div>
+            <div class="flex items-center justify-between">
+                <span class="text-3xl font-bold text-gray-900 dark:text-white">$ {{producto.precio_producto}} </span>
+                <a href="{% url 'agregar' producto.id %}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Añadir al carrito</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    {% if user.is_authenticated %}
+    <div class="mt-28 mb-28 mx-auto max-w-4xl bg-white border border-gray-200 rounded-lg shadow sm:p-8 md:p-12 dark:bg-gray-800 dark:border-gray-700">
+
+        <h2 class="text-4xl font-bold dark:text-white pb-4">Valoraciones</h2>
+    
+        <form method="post" action="">
+            {% csrf_token %}
+            
+
+
+
+            <div class="w-full mb-4 border border-gray-200 rounded-lg bg-blue-700 dark:bg-gray-700 dark:border-gray-600">
+                <textarea name = "comentario" id="{{ Form.comentario.id_for_label }}" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+                <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
+                    <button type="submit" class="inline-flex items-center py-2.5 px-10 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                        Publicar
+                    </button>
+                </div>
+            </div>
+        </form>
+        <p class="ms-auto text-xs text-gray-500 dark:text-gray-400">
+            Remember, contributions to this topic should follow our
+            <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Community Guidelines</a>.
+        </p>
+
+        
+
+
+        
+            {% comment %} <p></p>
+            <p class="mb-3 text-gray-500 dark:text-gray-400">Comentario: </p>
+         {% endcomment %}
+
+
+        {% for valoracion in valoraciones %}
+            <div class="flex items-start gap-2.5 pt-4 " >
+                <div class="flex flex-col w-full max-w-[800px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+                <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ valoracion.usuario.username }} </span>
+                </div>
+                <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{{ valoracion.comentario }}</p>
+                </div>
+            </div>
+         {% endfor %}
+        {% else %}
+
+        <div class=" mt-40 mb-28 mx-auto max-w-4xl bg-white border border-gray-200 rounded-lg shadow sm:p-8 md:p-12 dark:bg-gray-800 dark:border-gray-700 ">
+            <section class="bg-white dark:bg-gray-900 ">
+                <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
+                    <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Crea tu cuenta para poder comentar...</h1>
+                    <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">Con una cuenta podremos ver quien ha echo el comentario</p>
+                    <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+                        <a href="/signup" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                            Crear Cuenta
+                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            </svg>
+                        </a>
+                        <a href="/login123" class="inline-flex justify-center items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                        Iniciar sesión
+                        </a>  
+                    </div>
+                </div>
+            </section>
+
+            <h2 class="text-4xl font-bold dark:text-white pb-4 pt-4">Valoraciones: </h2>
+            {% for valoracion in valoraciones %}
+            <div class="flex items-start gap-2.5 pt-4 " >
+                <div class="flex flex-col w-full max-w-[800px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+                <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ valoracion.usuario.username }} </span>
+                </div>
+                <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{{ valoracion.comentario }}</p>
+                </div>
+            </div>
+         {% endfor %}
+        </div>
+
+        
+        {% endif %}
+            
+    </div>
 
 {% endblock %}
+
+

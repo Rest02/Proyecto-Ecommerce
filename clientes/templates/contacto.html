@@ -11,43 +11,72 @@
 
     {% block content %}
 
-    <div class="flex items-center justify-center h-screen">
 
-       
+    {% if user.is_authenticated %}
 
+        <div class="flex items-center justify-center pt-48">
 
-        <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-            <form class="space-y-6" action="{% url 'contacto' %}" method="POST">
-                {% csrf_token %}
-                <h5 class="text-xl font-medium text-gray-900 dark:text-white">Comunicate con nosotros</h5>
-
-                <div class="mb-6">
-                    <label for="default-input" for="{{ ContactoForm.telefono.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Télefono:</label>
-                    <input name = "telefono"type="tel" id="{{ ContactoForm.telefono.id_for_label }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" minlength="9">
-                </div>
-                <div class="mb-6">
-                    <label for="{{ ContactoForm.asunto.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Asunto:</label>
-                    <input name = "asunto" type="text" id="{{ ContactoForm.asunto.id_for_label }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
-                <div>
-                    <label for="{{ ContactoForm.mensaje.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tu mensaje:</label>
-                    <textarea name = "mensaje" id="{{ ContactoForm.mensaje.id_for_label }}" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
-                </div>
-                <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enviar mensaje</button>    
-                
-                {% if "of" in request.GET %}
-                    <h1>ERROR</h1>
-                {% endif %}
+        
 
 
+            <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+                <form class="space-y-6" action="{% url 'contacto' %}" method="POST">
+                    {% csrf_token %}
+                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">Comunicate con nosotros</h5>
 
-                {% if "error" in request.GET %}
-                    <h1>BUENO</h1>
-                {% endif %}
-            </form>
+                    <div class="mb-6">
+                        <label for="default-input" for="{{ ContactoForm.telefono.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Télefono:</label>
+                        <input name = "telefono"type="tel" id="{{ ContactoForm.telefono.id_for_label }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" minlength="9">
+                    </div>
+                    <div class="mb-6">
+                        <label for="{{ ContactoForm.asunto.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Asunto:</label>
+                        <input name = "asunto" type="text" id="{{ ContactoForm.asunto.id_for_label }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label for="{{ ContactoForm.mensaje.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tu mensaje:</label>
+                        <textarea name = "mensaje" id="{{ ContactoForm.mensaje.id_for_label }}" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enviar mensaje</button>    
+                    
+                    {% if "of" in request.GET %}
+                        <h1>ERROR</h1>
+                    {% endif %}
+
+
+
+                    {% if "error" in request.GET %}
+                        <h1>BUENO</h1>
+                    {% endif %}
+                </form>
+            </div>
         </div>
-    </div>
 
+    {% else %}
+
+        
+        <div class=" mt-40 mb-28 mx-auto max-w-4xl bg-white border border-gray-200 rounded-lg shadow sm:p-8 md:p-12 dark:bg-gray-800 dark:border-gray-700 ">
+            <section class="bg-white dark:bg-gray-900 ">
+                <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
+                    <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Crea tu cuenta para poder contactarte...</h1>
+                    <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">Con una cuenta podremos ver quien ha echo la solicitud</p>
+                    <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+                        <a href="/signup" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                            Crear Cuenta
+                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            </svg>
+                        </a>
+                        <a href="/login123" class="inline-flex justify-center items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                        Iniciar sesión
+                        </a>  
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+      
+    
+    {% endif %}
 
     {% endblock %}
 

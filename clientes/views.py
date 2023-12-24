@@ -6,10 +6,14 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout
 from django.contrib import messages
-from .models import Products, Valoracion
-from .forms import ValoracionForm
+from .models import Products, Valoracion, Direccion
+from .forms import ValoracionForm, PerfilForm
 from .carro import Carro
-from .forms import ContactoForm
+from .forms import ContactoForm, DireccionForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+
 # from django.db.models import Q
 
 
@@ -199,18 +203,75 @@ def about(request):
     return render(request, "about.html")
 
 
+# @login_required
+# def perfil(request):
+#     if request.method == 'POST':
+#         perfil_form = PerfilForm(request.POST, instance=request.user)
+#         password_form = PasswordChangeForm(request.user, request.POST)
+
+#         if perfil_form.is_valid() and password_form.is_valid():
+#             perfil_form.save()
+#             # Actualizar la sesión para reflejar los cambios en el nombre de usuario, si es necesario
+#             update_session_auth_hash(request, request.user)
+#             password_form.save()
+#             messages.success(request, 'Tu perfil y contraseña han sido actualizados correctamente.')
+#             return redirect('perfil')  # Puedes redirigir a donde quieras después de guardar
+#         else:
+#             messages.error(request, 'Hubo un error al actualizar tu perfil o contraseña.')
+#     else:
+#         perfil_form = PerfilForm(instance=request.user)
+#         password_form = PasswordChangeForm(request.user)
+
+#     return render(request, 'perfil.html', {'perfil_form': perfil_form, 'password_form': password_form})
 
 
 
+@login_required
+def ver_perfil(request):
+    try:
+        direccion = request.user.direccion
+    except Direccion.DoesNotExist:
+        direccion = None
+
+    if request.method == 'POST':
+        perfil_form = PerfilForm(request.POST, instance=request.user)
+        direccion_form = DireccionForm(request.POST, instance=direccion, prefix='direccion')
+
+        if perfil_form.is_valid() and direccion_form.is_valid():
+            perfil_form.save()
+            if direccion is None:
+                direccion = direccion_form.save(commit=False)
+                direccion.user = request.user
+                direccion.save()
+            else:
+                direccion_form.save()
+
+            messages.success(request, 'Perfil y dirección actualizados con éxito.')
+            return redirect('ver_perfil')
+        else:
+            messages.error(request, 'Hubo un error al actualizar el perfil o la dirección.')
+    else:
+        perfil_form = PerfilForm(instance=request.user)
+        direccion_form = DireccionForm(instance=direccion, prefix='direccion')
+
+    return render(request, 'ver_perfil.html', {'perfil_form': perfil_form, 'direccion_form': direccion_form})
 
 
 
+def cambiar_contraseña(request):
+    if request.method == 'POST':
+        password_form = PasswordChangeForm(request.user, request.POST)
+        if password_form.is_valid():
+            password_form.save()
+            update_session_auth_hash(request, request.user)
+            messages.success(request, 'Contraseña cambiada con éxito.')
+            return redirect('ver_perfil')
+        else:
+            messages.error(request, 'Hubo un error al cambiar la contraseña.')
+    else:
+        password_form = PasswordChangeForm(request.user)
 
-
-
-
-
-
+    return render(request, 'cambiar_contraseña.html', {'password_form': password_form})
 
 
 

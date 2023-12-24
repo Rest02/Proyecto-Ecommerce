@@ -1,0 +1,60 @@
+{% extends "layouts/base.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    {% block content %}
+
+    {% comment %} <h2>Editar Perfil</h2>
+    <form class = "pt-48" method="post" action="{% url 'perfil' %}">
+        <p>
+            {% csrf_token %}
+            {{ perfil_form.email }}
+            {{ perfil_form.first_name }}
+            {{ perfil_form.last_name }}
+            {{ perfil_form.username }}
+        </p>
+        <button type="submit">Guardar cambios</button>
+    </form>
+    
+    <h2>Cambiar Contraseña</h2>
+    <form class = "pt-48" method="post" action="{% url 'perfil' %}">
+        {% csrf_token %}
+        {{ password_form.as_p }}
+        <button type="submit">Cambiar Contraseña</button>
+    </form> {% endcomment %}
+
+
+
+
+
+
+    <h2>Perfil de {{ user.username }}</h2>
+
+    <form class = "pt-48" method="post" action="{% url 'ver_perfil' %}">
+        {% csrf_token %}
+        <p>correo : {{ perfil_form.email }}</p>
+        <p>   {{ perfil_form.first_name }}</p>
+            <p>    {{ perfil_form.last_name }}</p>
+                <p>  {{ perfil_form.username }}</p>
+
+            {{ direccion_form.as_p }}
+
+        <button type="submit">Actualizar perfil</button>
+    </form>
+
+
+
+    {% endblock %}
+
+
+</body>
+</html>
+
+

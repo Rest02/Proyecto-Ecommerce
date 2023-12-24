@@ -31,3 +31,16 @@ class contacto(models.Model):
 
     def __str__(self):
         return self.user.username + " - " + self.asunto
+    
+
+class Direccion(models.Model):
+    user = models.OneToOneField(User, on_delete = models.CASCADE, blank=True, null=True)
+    codigo_postal = models.IntegerField(blank=True, null=True)
+    region = models.CharField(max_length=255,blank=True, null=True)
+    ciudad = models.CharField(max_length=255, blank=True, null=True)
+    comuna = models.CharField(max_length=255, blank=True, null=True)
+    calle = models.CharField(max_length=255, blank=True, null=True)
+    casa_depto= models.IntegerField()
+
+    def __str__(self):
+        return self.user.username +" - "+ str(self.codigo_postal)

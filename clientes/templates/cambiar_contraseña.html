@@ -1,0 +1,21 @@
+{% extends "layouts/base.html" %}
+
+
+{% block content %}
+
+    <div class = "pt-48" >
+        <h2>Cambiar Contraseña</h2>
+
+        <form method="post" action="{% url 'cambiar_contraseña' %}">
+        {% csrf_token %}
+        {{ password_form.as_p }}
+        <button type="submit">Cambiar contraseña</button>
+        </form>
+    </div>
+
+
+{% endblock %}
+
+
+
+

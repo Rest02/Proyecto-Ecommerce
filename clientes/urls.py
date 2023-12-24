@@ -12,4 +12,6 @@ urlpatterns = [
     path("restar/<int:producto_id>/", views.restar_producto, name = "restar"),
     path("limpiar/<int:producto_id>/", views.limpiar_carro, name = "limpiar"),
     path('logout/', views.logout_view, name='logout'),
+    path("contacto/", views.contacto, name = "contacto" ),
+    path("about/", views.about, name = "about" )
 ]

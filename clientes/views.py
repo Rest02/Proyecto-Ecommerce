@@ -9,6 +9,7 @@ from django.contrib import messages
 from .models import Products, Valoracion
 from .forms import ValoracionForm
 from .carro import Carro
+from .forms import ContactoForm
 # from django.db.models import Q
 
 
@@ -153,6 +154,49 @@ def limpiar_carro(request):
 
 
 
+from django. core.mail import send_mail
+
+
+def mandar_correo(username, asunto, mensaje, user_email):
+    subject = f"{asunto}"
+    body = f"¡Hola Josefa!\n\nNos ponemos en contacto contigo ya que el usuario {username} con el correo {user_email} subio el siguiente mensaje a tu pagina web.\n\n"
+    recipient_list = ["rodriguez.bastidas.matias@gmail.com"]
+
+    send_mail(subject, body + mensaje, user_email, recipient_list)
+
+
+from django.urls import reverse
+
+
+def contacto(request):
+    contact_form = ContactoForm()
+
+    if request.method == "POST":
+        contact_form = ContactoForm(data=request.POST)
+
+        if contact_form.is_valid():
+            contacto = contact_form.save(commit=False)
+            contacto.user = request.user
+            user_email = contacto.user.email
+            username = contacto.user.username
+            asunto = request.POST["asunto"]
+            mensaje = request.POST["mensaje"]
+            
+            mandar_correo(username, asunto , mensaje, user_email)
+            contact_form.save()
+
+            # Tengo que avisar que todo fue bien
+            return redirect(reverse("contacto")+"?ok")
+        else:
+            # Tengo que generar un error
+            return redirect(reverse("contacto")+"?error")
+
+    return render(request, "contacto.html", {"ContactoForm" : contact_form })
+
+   
+
+def about(request):
+    return render(request, "about.html")
 
 
 

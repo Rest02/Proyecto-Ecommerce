@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Valoracion
+from .models import Valoracion, contacto
 
 class CustomUserCreationForm(UserCreationForm):
 	email = forms.EmailField(required=True)
@@ -25,3 +25,9 @@ class ValoracionForm(forms.ModelForm):
     class Meta:
         model = Valoracion
         fields = ['puntuacion', 'comentario']
+
+
+class ContactoForm(forms.ModelForm):
+    class Meta:
+        model = contacto
+        fields = ['asunto', 'telefono', "mensaje"]

@@ -2,14 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-
-# Create your models here.
-# class Clientes(models.Models):
-#     nombre = models.CharField(max_length=200)
-#     nombre_usuario = models.CharField(max_length=200)
-#     correo_electronico = models.CharField(  )
-
-
 class Products(models.Model):
     cantidad_disponible = models.IntegerField(default=0)
     nombre_producto = models.CharField(max_length=200)
@@ -29,3 +21,13 @@ class Valoracion(models.Model):
 
     def __str__(self):
         return self.comentario + " - " + self.producto.nombre_producto
+    
+
+class contacto(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    asunto = models.CharField(max_length=200)
+    telefono = models.IntegerField(max_length=9)
+    mensaje = models.TextField()
+
+    def __str__(self):
+        return self.user.username + " - " + self.asunto

@@ -1,60 +1,77 @@
-{% extends "layouts/base.html" %}
+{% extends "layouts/base.html"%}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="ruta/a/tu/estilo/fomantic-ui.min.css">
+    <title>Tu Título</title>
 </head>
-<body>
-    
-    {% block content %}
+{% block content %}
 
-    {% comment %} <h2>Editar Perfil</h2>
-    <form class = "pt-48" method="post" action="{% url 'perfil' %}">
-        <p>
+
+<body class="bg-gray-100" >
+    
+    <div class=" mt-48 mb-28 mx-auto max-w-4xl bg-white border border-gray-200 rounded-lg shadow sm:p-8 md:p-12 dark:bg-gray-800 dark:border-gray-700 ">
+
+    <div class="container mx-auto p-5 bg-white rounded-lg shadow-md ">
+        <h2 class="text-2xl font-bold mb-4">Perfil de {{ user.username }}</h2>
+    
+        <form class="space-y-4" method="post" action="{% url 'ver_perfil' %}">
             {% csrf_token %}
-            {{ perfil_form.email }}
-            {{ perfil_form.first_name }}
-            {{ perfil_form.last_name }}
-            {{ perfil_form.username }}
-        </p>
-        <button type="submit">Guardar cambios</button>
-    </form>
     
-    <h2>Cambiar Contraseña</h2>
-    <form class = "pt-48" method="post" action="{% url 'perfil' %}">
-        {% csrf_token %}
-        {{ password_form.as_p }}
-        <button type="submit">Cambiar Contraseña</button>
-    </form> {% endcomment %}
+            <div class="flex flex-col  pt-2">
+                <label class="text-sm font-semibold mb-1">Correo:</label>
+                {{ perfil_form.email }}
+            </div>
+    
+            <div class="flex flex-col">
+                <label class="text-sm font-semibold mb-1">Nombre:</label>
+                {{ perfil_form.first_name }}
+    
+            <div class="flex flex-col  pt-3">
+                <label class="text-sm font-semibold mb-1">Apellido:</label>
+                {{ perfil_form.last_name }}
+            </div>
+    
+            <div class="flex flex-col  pt-3">
+                <label class="text-sm font-semibold mb-1">Nombre de usuario:</label>
+                {{ perfil_form.username }}
+            </div>
+            <div class="flex flex-col  pt-3">
+                <label class="text-sm font-semibold mb-1">Código Postal:</label>
+                {{ direccion_form.codigo_postal }}
+            </div>
+            <div class="flex flex-col  pt-3">
+                <label class="text-sm font-semibold mb-1">Región</label>
+                {{ direccion_form.region }}
+            </div>
+            <div class="flex flex-col  pt-3">
+                <label class="text-sm font-semibold mb-1">Ciudad</label>
+                {{ direccion_form.ciudad }}
+            </div>
+            <div class="flex flex-col  pt-3">
+                <label class="text-sm font-semibold mb-1">Comuna</label>
+                {{ direccion_form.comuna }}
+            </div>
+            <div class="flex flex-col  pt-3">
+                <label class="text-sm font-semibold mb-1">Calle:</label>
+                {{ direccion_form.calle }}
+            </div>
+            <div class="flex flex-col  pt-3">
+                <label class="text-sm font-semibold mb-1">Casa o dpto:</label>
+                {{ direccion_form.casa_depto }}
+            </div>
 
+            <!-- Agrega estilos para los demás campos de dirección -->
+            <div class="flex flex-col  pt-3">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" type="submit">Actualizar perfil</button>
+            </div>
+        </form>
+    </div>
+</div>
+    </body>
 
-
-
-
-
-    <h2>Perfil de {{ user.username }}</h2>
-
-    <form class = "pt-48" method="post" action="{% url 'ver_perfil' %}">
-        {% csrf_token %}
-        <p>correo : {{ perfil_form.email }}</p>
-        <p>   {{ perfil_form.first_name }}</p>
-            <p>    {{ perfil_form.last_name }}</p>
-                <p>  {{ perfil_form.username }}</p>
-
-            {{ direccion_form.as_p }}
-
-        <button type="submit">Actualizar perfil</button>
-    </form>
-
-
-
-    {% endblock %}
-
-
-</body>
+{% endblock %}
 </html>
-
-

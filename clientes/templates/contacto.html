@@ -6,20 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luministica</title>
 </head>
+{% block content %}
 <body>
     
 
-    {% block content %}
+
 
 
     {% if user.is_authenticated %}
 
-        <div class="flex items-center justify-center pt-48">
+        <div class="flex items-center justify-center pt-48 ">
 
         
 
 
-            <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 ">
                 <form class="space-y-6" action="{% url 'contacto' %}" method="POST">
                     {% csrf_token %}
                     <h5 class="text-xl font-medium text-gray-900 dark:text-white">Comunicate con nosotros</h5>
@@ -78,13 +79,14 @@
     
     {% endif %}
 
-    {% endblock %}
+
 
 
 
 
     
 </body>
+{% endblock %}
 </html>
 
 

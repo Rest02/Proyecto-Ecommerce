@@ -1,4 +1,4 @@
-<table border="1">
+<!-- <table border="1">
 
     <thead>
 
@@ -12,45 +12,41 @@
             <td>Producto</td>
 
             <td>Cantidad</td>
-            
+
             <td>Suma</td>
 
         </tr>
-
 
     </thead>
 
     <tbody>
         {% if request.session.carro.items %}
 
-            {% for key, value in request.session.carro.items %}
+        {% for key, value in request.session.carro.items %}
 
-                <tr>
-                    <td>{{value.nombre_producto}}</td>
-                    <td>{{value.cantidad_disponible}}</td>
-                    <td>
-                        <a href="{% url 'agregar' value.producto_id %}">+</a>
-                        <a href="{% url 'restar' value.producto_id %}">-</a> <br>
+        <tr>
+            <td>{{value.nombre_producto}}</td>
+            <td>{{value.cantidad_disponible}}</td>
+            <td>
+                <a href="{% url 'agregar' value.producto_id %}">+</a>
+                <a href="{% url 'restar' value.producto_id %}">-</a> <br>
 
-                        {{value.precio_producto}}
-                    </td>
-                </tr>
+                {{value.precio_producto}}
+            </td>
+        </tr>
 
-
-
-            {% endfor %}
+        {% endfor %}
 
         {% else %}
 
-            <tr>
-                <td colspan="3">
-                    No se han añadido productos aún
-                </td>
+        <tr>
+            <td colspan="3">
+                No se han añadido productos aún
+            </td>
 
-            </tr>
+        </tr>
         {% endif %}
     </tbody>
-
 
     <tfoot>
 
@@ -64,10 +60,84 @@
 
         </tr>
 
-
     </tfoot>
 
+</table>  -->
 
-</table>
+
+
+
+
+<div class="flex items-center justify-center pt-20 ">
+
+    <table class="w-4/5 text-sm text-left rtl:text-right text-blue-100 dark:text-blue-100">
+        <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 dark:text-white text-center ">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Product name
+                </th>
+                <th scope="col" class="px-6 py-3 bg-blue-500">
+                    Cantidad
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Category
+                </th>
+                <th scope="col" class=" px-6 py-3 bg-blue-500 ">
+                    Precio
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if request.session.carro.items %}
+                {% for key, value in request.session.carro.items %}
+                <tr class="bg-blue-600 border-b border-blue-400 hover:bg-blue-500 text-center ">
+                    <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                        {{value.nombre_producto}}
+                    </th>
+                    <td class="px-6 py-4 bg-blue-500">
+                        {{value.cantidad_disponible}}
+                    </td>
+                    <td class="px-6 py-4">
+                        Laptop
+                    </td>
+                    <td class="px-6 py-4 bg-blue-500">
+                        {{value.precio_producto}}
+                    </td>
+                    <td class="px-6 py-4">
+                        <a href="{% url 'agregar' value.producto_id %}" class="font-medium text-white hover:underline">+</a>
+                        <a href="{% url 'restar' value.producto_id %}" class="font-medium text-white hover:underline">-</a>
+                    </td>
+                </tr> 
+                {% endfor %}           
+            {% else %}
+            {% comment %} {% for key, value in request.session.carro.items %} {% endcomment %}
+                <tr class="bg-blue-600 border-b border-blue-400 hover:bg-blue-500 text-center ">
+                    <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                        vacio
+                    </th>
+                    <td class="px-6 py-4 bg-blue-500">
+                        0
+                    </td>
+                    <td class="px-6 py-4">
+                        0
+                    </td>
+                    <td class="px-6 py-4 bg-blue-500">
+                        0
+                    </td>
+                    <td class="px-6 py-4">
+                        <a href="" class="font-medium text-white hover:underline">+</a>
+                        <a href="" class="font-medium text-white hover:underline">-</a>
+                    </td>
+                </tr>    
+            {% comment %} {% endfor %}  {% endcomment %}
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+
 
 

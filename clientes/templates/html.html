@@ -1,0 +1,71 @@
+<form class="pt-48" method="post" action="{% url 'ver_perfil' %}">
+  {% csrf_token %}
+  correo : {{ perfil_form.email.id_for_label }}</p>
+  {% comment %} <p>{{ perfil_form.first_name }}</p>
+  <p>{{ perfil_form.last_name }}</p>
+  <p>{{ perfil_form.username }}</p>
+  <p>{{ direccion_form.codigo_postal.id_for_label }}</p>
+  <p>{{ direccion_form.region }}</p>
+  <p>{{ direccion_form.ciudad }}</p>
+  <p>{{ direccion_form.comuna }}</p>
+  <p>{{ direccion_form.calle }}</p>
+  <p>{{ direccion_form.casa_depto }}</p>  {% endcomment %}
+  <button type="submit">Actualizar perfil</button>
+</form>    
+
+
+<form class="pt-48 max-w-2xl mx-auto" method="post" action="{% url 'ver_perfil' %}">
+  {% csrf_token %}
+  
+  <div class="mb-4">
+      <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Correo:</label>
+      {{ perfil_form.email }}
+  </div>
+
+  <div class="mb-4">
+      <label for="first_name" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
+      {{ perfil_form.first_name }}
+  </div>
+
+  <div class="mb-4">
+      <label for="last_name" class="block text-gray-700 text-sm font-bold mb-2">Apellido:</label>
+      {{ perfil_form.last_name }}
+  </div>
+
+  <div class="mb-4">
+      <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Nombre de usuario:</label>
+      {{ perfil_form.username }}
+  </div>
+  <div class="mb-4">
+      <label for="codigo_postal" class="block text-gray-700 text-sm font-bold mb-2">Código Postal:</label>
+      {{ direccion_form.codigo_postal }}
+  </div>
+  
+  <div class="mb-4">
+      <label for="region" class="block text-gray-700 text-sm font-bold mb-2">Región:</label>
+      {{ direccion_form.region }}
+  </div>
+  
+  <div class="mb-4">
+      <label for="ciudad" class="block text-gray-700 text-sm font-bold mb-2">Ciudad:</label>
+      {{ direccion_form.ciudad }}
+  </div>
+  
+  <div class="mb-4">
+      <label for="comuna" class="block text-gray-700 text-sm font-bold mb-2">Comuna:</label>
+      {{ direccion_form.comuna }}
+  </div>
+  
+  <div class="mb-4">
+      <label for="calle" class="block text-gray-700 text-sm font-bold mb-2">Calle:</label>
+      {{ direccion_form.calle }}
+  </div>
+  
+  <div class="mb-4">
+      <label for="casa_depto" class="block text-gray-700 text-sm font-bold mb-2">Casa/Depto:</label>
+      {{ direccion_form.casa_depto }}
+  </div>
+  <!-- Repite el mismo patrón para los campos de dirección -->
+
+  <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">Actualizar perfil</button>
+</form>

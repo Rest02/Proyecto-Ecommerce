@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen  bg-orange-50 ">
 
 
 
@@ -16,8 +17,8 @@
     <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="/home" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo">
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Luna Mistica</span>
+            <img src="{% static 'logo.png' %}" class="h-8" alt="">
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Luna Mística</span>
         </a>
         
         <div class="flex md:order-2 space-x-3 md:space-x-2 rtl:space-x-reverse">
@@ -61,7 +62,7 @@
             <a href="/home" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
             </li>
             <li>
-            <a href="/about" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+            <a href="/about" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Información</a>
             </li>
             <li>
             <a href="/contacto" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contacto</a>
@@ -82,27 +83,27 @@
     <footer class="bg-white shadow dark:bg-gray-900 bottom-0 w-full flex-shrink-0">
         <div class="w-full max-w-screen-xl mx-auto p-2 md:p-4">
             <div class="sm:flex sm:items-center sm:justify-between">
-                <a href="https://flowbite.com/" class="flex items-center mb-2 sm:mb-0 space-x-3 rtl:space-x-reverse">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 md:h-8" alt="Flowbite Logo" />
-                    <span class="self-center text-xl md:text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                <a href="/home" class="flex items-center mb-2 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                    <img src="{% static 'logo.png' %}" class="h-6 md:h-8" alt="Flowbite Logo" />
+                    <span class="self-center text-xl md:text-2xl font-semibold whitespace-nowrap dark:text-white">Luna Mística</span>
                 </a>
                 <ul class="flex flex-wrap items-center mb-4 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                     <li>
-                        <a href="#" class="hover:underline me-2 md:me-4">About</a>
+                        <a href="/about" class="hover:underline me-2 md:me-4">About</a>
                     </li>
                     <li>
-                        <a href="#" class="hover:underline me-2 md:me-4">Privacy Policy</a>
+                        <a href="#" class="hover:underline me-2 md:me-4">Políticas de privacidad</a>
                     </li>
                     <li>
-                        <a href="#" class="hover:underline me-2 md:me-4">Licensing</a>
+                        <a href="#" class="hover:underline me-2 md:me-4">Licencias</a>
                     </li>
                     <li>
-                        <a href="#" class="hover:underline">Contact</a>
+                        <a href="/contacto" class="hover:underline">Contacto</a>
                     </li>
                 </ul>
             </div>
             <hr class="my-4 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-6" />
-            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.</span>
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="/home" class="hover:underline">LunaMística</a>. Todos los derechos reservados.</span>
         </div>
     </footer>
 

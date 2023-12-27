@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,63 +10,107 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
 </head>
+
 <body>
 
     {% block content %}
     {% load static %}
     <h1>home</h1>
 
+    <div class="m-10 pt-16 ">
 
+        <div class="flex flex-col">
+            <div class="rounded-xl border border-gray-200 bg-slate-900 p-16 shadow-lg ">
+                <form class="" method="get" action="{% url 'home' %}">
+                    <div class="relative mb-10 w-full flex items-center justify-between rounded-md">
+                        <svg class="absolute left-2 block h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8" class=""></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" class=""></line>
+                        </svg>
+                        <input type="name" name="nombre"
+                            class="h-12 w-full cursor-text rounded-md border border-gray-100 bg-gray-100 py-4 pr-40 pl-12 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                            placeholder="Busca por nombre de producto" value="{{ request.GET.nombre }}" />
+                    </div>
 
-    <div class="flex flex-wrap justify-around py-32" >
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+                        <div class="flex flex-col">
+                            <label for="name" class="text-sm font-medium text-slate-50">Categoria</label>
+                            <input type="text" name="categoria" placeholder="Ropa"
+                                class="mt-2 block w-full rounded-md border border-gray-100 bg-gray-100 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                value="{{ request.GET.categoria }}" />
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label for="name" class="text-sm font-medium text-slate-50">Precio Minimo</label>
+                            <input type="number" name="precio_min" placeholder="19990"
+                                class="mt-2 block w-full rounded-md border border-gray-100 bg-gray-100 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                value="{{ request.GET.precio_min }}" />
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label for="name" class="text-sm font-medium text-slate-50">Precio Maximo</label>
+                            <input type="number" name="precio_max" placeholder="100000"
+                                class="mt-2 block w-full rounded-md border border-gray-100 bg-gray-100 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                value="{{ request.GET.precio_max }}" />
+                        </div>
+
+                        <div class=" mt-6 grid w-full grid-cols-1 space-x-4 md:flex">
+                            <button type="submit"
+                                class="rounded-lg bg-blue-600 px-8 py-2 font-medium text-white outline-none hover:opacity-80 focus:ring">Buscar</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="flex flex-wrap justify-around py-32">
         {% for producto in productos %}
-            <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-12">
-                <a href="{% url 'vista_producto' products_id=producto.id %}">
-                    <img class="p-8 rounded-t-lg" src="{{ producto.image.url }}" alt="{{ producto.nombre_producto }}" />
+        <div
+            class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-12">
+            <a href="{% url 'vista_producto' products_id=producto.id %}">
+                <img class="p-8 rounded-t-lg" src="{{ producto.image.url }}" alt="{{ producto.nombre_producto }}" />
+            </a>
+            <div class="px-5 pb-5">
+                <a href="#">
+                    <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                        {{ producto.nombre_producto }}</h5>
                 </a>
-                <div class="px-5 pb-5">
-                    <a href="#">
-                        <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ producto.nombre_producto }}</h5>
-                    </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{producto.descripcion_producto}}</p>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 pt-2 ">{{producto.descripcion_producto}}</p>
 
-                    <div class="flex items-center mt-2.5 mb-5">
-                        <div class="flex items-center space-x-1 rtl:space-x-reverse"></div>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-3xl font-bold text-gray-900 dark:text-white">$ {{ producto.precio_producto }}</span>
-                        <a href="{% url 'agregar' producto.id %}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a>
-                    </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-3xl font-bold text-gray-900 dark:text-white">$
+                        {{ producto.precio_producto }}</span>
+                    <a href="{% url 'agregar' producto.id %}"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Agregar</a>
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
-    
-    <form method="get" action="{% url 'home' %}">
+
+    {% comment %} <form method="get" action="{% url 'home' %}">
         <label for="categoria">Categoría:</label>
         <input type="text" name="categoria" value="{{ request.GET.categoria }}">
-        
+
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" value="{{ request.GET.nombre }}">
-        
+
         <label for="precio_min">Precio mínimo:</label>
         <input type="text" name="precio_min" value="{{ request.GET.precio_min }}">
-        
+
         <label for="precio_max">Precio máximo:</label>
         <input type="text" name="precio_max" value="{{ request.GET.precio_max }}">
-        
+
         <button type="submit">Buscar</button>
-    </form>
-
-
+    </form> {% endcomment %}
 
     {% endblock %}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
-    
+
 </body>
+
 </html>
-
-
-
-

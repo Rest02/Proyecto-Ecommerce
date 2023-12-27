@@ -5,17 +5,74 @@
 {% block content %}
 
 
+{% comment %} {{ form.username }}
+{{ form.first_name.id_for_label }}
+{{ form.last_name.id_for_label }}
+{{ form.email }}
+{{ form.password1 }}
+{{ form.password2 }} {% endcomment %}
 
-<form class = "pt-48" action="/signup/" method="POST">
+
+
+<div class="flex items-center justify-center pt-40 pb-40">
+    <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 ">
+        <form class="max-w-sm mx-auto" action="/signup/" method="POST">
+            {% csrf_token %}
+            <div class="mb-5">
+            <label for="{{ form.username.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de usuario</label>
+            <input type="text" name = "{{ form.username.name }}" id="{{ form.username.id_for_label }}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="nombre_de_usuario" required>
+            </div>
+            <div class="mb-5">
+            <label for="{{ form.first_name.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
+            <input type="text" name = "{{ form.first_name.name }}"id="{{ form.first_name.id_for_label }}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Alejandro" required>
+            </div>
+            <div class="mb-5">
+                <label for="{{ form.last_name.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Apellido</label>
+                <input type="text" name = "{{ form.last_name.name }}"id="{{ form.last_name.id_for_label }}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Sanchez" required>
+            </div>
+            <div class="mb-5">
+                <label for="{{ form.email.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo Electronico</label>
+                <input type="email" name = "{{ form.email.name }}"id="{{ form.email.id_for_label }}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="alguien@gmail.com" required>
+            </div>
+            <div class="mb-5">
+                <label for="{{ form.password1.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
+                <input type="password" name = "{{ form.password1.name }}"id="{{ form.password1.id_for_label }}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="••••••••" required>
+            </div>
+            <div class="mb-5">
+                <label for="{{ form.password2.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Repetir Contraseña</label>
+                <input type="password" name = "{{ form.password2.name }}"id="{{ form.password2.id_for_label }}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="••••••••" required>
+            </div>
+            <div class="flex items-start mb-5">
+            <div class="flex items-center h-5">
+                <input id="terms" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required>
+            </div>
+            <label for="terms" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Estoy de acuerdo con <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">los terminos y condiciones</a></label>
+            </div>
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Registrarte con una cuenta nueva</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+{% comment %} <form class = "pt-48" action="/signup/" method="POST">
 
     {% csrf_token %}
-    {{form.as_p}}
+    {{form.username}}
+    {{form.first_name}}
+    {{form.last_name}}
+    {{form.email}}
+    {{form.password1}}
+    {{form.password2}}
+
 
     <button>
         Signup
     </button>
 
-</form>
+</form> {% endcomment %}
 
 
 
